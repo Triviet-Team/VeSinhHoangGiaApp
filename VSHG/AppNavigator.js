@@ -87,8 +87,8 @@ ContactStack.navigationOptions = {
 }
 
 const AppNavigator = createBottomTabNavigator({
-  ProductsStack,
   HomepageStack,
+  ProductsStack,
   ServicesStack,
   ChemistriesStack,
   ContactStack

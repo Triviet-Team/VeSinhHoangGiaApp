@@ -1,11 +1,21 @@
 import React from 'react';
-import { View, StyleSheet, FlatList, Dimensions, Text } from 'react-native';
-import Carousel, { ParallaxImage } from 'react-native-snap-carousel';
+import { StyleSheet, Image, View, Text, Dimensions, ScrollView } from 'react-native';
 
-import ProductListItem from '../components/ProductListItem';
 import Header from './../components/Header';
+import Banner from './../components/Homepage/Banner';
+import ServiceHomepage from './../components/Homepage/ServicesHomepage';
 
-const { width: screenWidth } = Dimensions.get('window')
+const cards = [
+  {
+    image: 'https://scontent-hkg3-1.cdninstagram.com/vp/78c2d756dfe154d18e6c8b2c5d503cbe/5D8F792E/t51.2885-15/sh0.08/e35/p640x640/60281421_2319158248131071_2993096072439239636_n.jpg?_nc_ht=scontent-hkg3-1.cdninstagram.com',
+  },
+  {
+    image: 'https://scontent-hkg3-1.cdninstagram.com/vp/1c2cd96e9e5ff9192efc0e3a534e6ba2/5D8DD6C0/t51.2885-15/sh0.08/e35/p640x640/60114620_335883707122529_3423228155080954832_n.jpg?_nc_ht=scontent-hkg3-1.cdninstagram.com',
+  },
+  {
+    image: 'https://scontent-hkg3-1.cdninstagram.com/vp/898ab36b8c29045aa5c5333495a23a17/5D8CB6A8/t51.2885-15/sh0.08/e35/s640x640/54511124_828195200864914_2233949510347612166_n.jpg?_nc_ht=scontent-hkg3-1.cdninstagram.com',
+  },
+];
 
 export default class Homepage extends React.Component {
   static navigationOptions = () => {
@@ -15,103 +25,29 @@ export default class Homepage extends React.Component {
       headerBackTitleStyle: { display: 'none' }
     }
   }
-
+  
   constructor(props) {
     super(props);
 
     this.state = {
-      products: [
-        {
-          id: 1,
-          image: 'https://vesinhcongnghiep.com.vn/uploads/images/product/350_350/509540405_13.jpg',
-          name: 'Máy chà sàn công nghiệp',
-          code: '553SM',
-          description: 'lorem lorem',
-          category: 1
-        },
-        {
-          id: 2,
-          image: 'https://vesinhcongnghiep.com.vn/uploads/images/product/350_350/1048123779_55.jpg',
-          name: 'Máy chà sàn công nghiệp 123',
-          code: '553SM',
-          description: 'lorem lorem',
-          category: 1
-        },{
-          id: 3,
-          image: 'https://vesinhcongnghiep.com.vn/uploads/images/product/350_350/1143226388_4.jpg',
-          name: 'Máy chà sàn công nghiệp 321',
-          code: '553SM',
-          description: 'lorem lorem',
-          category: 1
-        },{
-          id: 4,
-          image: 'https://vesinhcongnghiep.com.vn/uploads/images/product/350_350/611944059_7.jpg',
-          name: 'Máy chà sàn công nghiệp 1222223',
-          code: '553SM',
-          description: 'lorem lorem',
-          category: 1
-        },
-      ]
+      banners: cards
     }
   }
 
-  _renderItem ({item, index}, parallaxProps) {
-    return (
-        <View style={styles.item}>
-            <ParallaxImage
-                source={{ uri: item.image }}
-                containerStyle={styles.imageContainer}
-                style={styles.image}
-                parallaxFactor={0.4}
-                {...parallaxProps}
-            />
-            <Text style={styles.title} numberOfLines={2}>
-                { item.title }
-            </Text>
-        </View>
-    );
-}
-
   render() {
-    const { navigation } = this.props;
-    const { products } = this.state;
+    const { banners } = this.state;
 
     return (
-      <View style={styles.container}>
-       <Carousel
-          sliderWidth={screenWidth}
-          sliderHeight={screenWidth}
-          itemWidth={screenWidth - 60}
-          data={this.state.products}
-          renderItem={this._renderItem}
-          hasParallaxImages={true}
-      />
-      </View>
+      <ScrollView style={styles.container}>
+        <Banner banners={banners} />
+        <ServiceHomepage />
+      </ScrollView>
     )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'stretch',
-    justifyContent: 'center',
-    marginTop: 15,
-  },
-  scrollView: {
-    paddingHorizontal: 15
-  },
-  item: {
-    width: screenWidth - 60,
-    height: screenWidth - 60,
-  },
-  imageContainer: {
-    flex: 1,
-    // marginBottom: Platform.select({ ios: 0, android: 1 }), // Prevent a random Android rendering issue
-    backgroundColor: 'white',
-    borderRadius: 8,
-  },
-  image: {
-    ...StyleSheet.absoluteFillObject,
-    resizeMode: 'cover',
-  },
+    backgroundColor: '#f9f9f9'
+  }
 })

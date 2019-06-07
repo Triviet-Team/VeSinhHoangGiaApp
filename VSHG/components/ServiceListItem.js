@@ -62,9 +62,11 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     marginBottom: 5,
     textAlign: 'left',
+    lineHeight: 21
   },
   code: {
     textAlign: 'left',
-    color: '#585858'
+    color: '#585858',
+    lineHeight: 21
   }
 })

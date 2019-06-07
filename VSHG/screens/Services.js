@@ -89,7 +89,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 7.5,
   },
   wrapper: {
-    // flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between'
