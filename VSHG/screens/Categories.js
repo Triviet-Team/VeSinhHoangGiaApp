@@ -9,9 +9,9 @@ import callApi from './../callApi';
 export default class Categories extends React.Component {
   static navigationOptions = () => {
     return {
-      headerTitle: <Header />,
+      headerTitle: <Header titleScreen="Vệ sinh Hoàng Gia" />,
       headerStyle: { backgroundColor: '#377ECC', height: 60 },
-      headerBackTitle: 'Trở về'
+      headerBackTitleStyle: { display: 'none' }
     }
   }
 

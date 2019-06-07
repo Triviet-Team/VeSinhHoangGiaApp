@@ -10,8 +10,9 @@ const { width: screenWidth } = Dimensions.get('window')
 export default class Homepage extends React.Component {
   static navigationOptions = () => {
     return {
-      headerTitle: <Header />,
+      headerTitle: <Header titleScreen="Vệ sinh Hoàng Gia"/>,
       headerStyle: { backgroundColor: '#377ECC', height: 60 },
+      headerBackTitleStyle: { display: 'none' }
     }
   }
 

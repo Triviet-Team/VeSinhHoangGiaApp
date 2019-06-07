@@ -2,12 +2,12 @@ import React from 'react';
 import { ScrollView, Text, Image, StyleSheet, View, TouchableOpacity, Linking } from 'react-native';
 import HTML from 'react-native-render-html';
 
-import Header from './../components/Header';
+import Header from '../components/Header';
 
 export default class ProductDetail extends React.Component {
   static navigationOptions = () => {
     return {
-      headerTitle: <Header titleScreen="Chi tiết sản phẩm" />,
+      headerTitle: <Header titleScreen="Chi tiết dịch vụ" />,
       headerStyle: { backgroundColor: '#377ECC', height: 60 },
       headerTintColor: 'white',
       headerBackTitleStyle: { display: 'none' }
@@ -16,10 +16,10 @@ export default class ProductDetail extends React.Component {
 
   render() {
     const { navigation } = this.props;
-    const name = navigation.getParam('productName')
-    const image = navigation.getParam('productImage')
-    const description = navigation.getParam('productDesc');
-    const imgDirUrl = 'https://vesinhcongnghiep.com.vn/uploads/images/product/350_350';
+    const name = navigation.getParam('serviceName')
+    const image = navigation.getParam('serviceImage')
+    const description = navigation.getParam('serviceDesc');
+    const imgDirUrl = 'https://vesinhcongnghiep.com.vn/uploads/images/news/350_350';
     
     return (
       <View>
@@ -27,20 +27,17 @@ export default class ProductDetail extends React.Component {
           <View style={styles.wrapper}>
             <View style={styles.container}>
               <Text style={styles.name}>{ name }</Text>
-              <View style={styles.imgBox}>
-                <Image resizeMode="contain" style={styles.img} source={{ uri: `${imgDirUrl}/${image}` }} />
-              </View>
+                <Image style={styles.img} source={{ uri: `${imgDirUrl}/${image}` }} />
             </View>
 
             <View style={styles.description}>
-              <Text style={styles.descriptionTitle}>Chi tiết sản phẩm</Text>
               <HTML html={description} />
             </View>
           </View>
         </ScrollView>
         <TouchableOpacity activeOpacity={0.9} style={styles.order}>
           <Text style={styles.orderText} onPress={ () => Linking.openURL('tel:0912345678')}>
-            LIÊN HỆ ĐẶT MUA
+            LIÊN HỆ ĐẶT DỊCH VU
           </Text>
         </TouchableOpacity>
       </View>

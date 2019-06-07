@@ -6,8 +6,9 @@ import Header from './../components/Header';
 export default class Chemistries extends React.Component {
   static navigationOptions = () => {
     return {
-      headerTitle: <Header />,
+      headerTitle: <Header titleScreen="Hóa chất" />,
       headerStyle: { backgroundColor: '#377ECC' },
+      headerBackTitleStyle: { display: 'none' }
     }
   }
 

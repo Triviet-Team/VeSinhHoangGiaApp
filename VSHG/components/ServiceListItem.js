@@ -4,7 +4,8 @@ import { View, Text, Image, StyleSheet, TouchableOpacity, Dimensions } from 'rea
 const { width, height } = Dimensions.get('window');
 
 export default function ProductListItem(props) {  
-  const { product, onPress } = props;
+  const { service, onPress } = props;
+  const imgDirUrl = 'https://vesinhcongnghiep.com.vn/uploads/images/news/350_350';
 
   return (
     <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
@@ -12,15 +13,15 @@ export default function ProductListItem(props) {
         <View style={styles.imgBox}>
           <Image 
             style={styles.img} 
-            source={{ uri: `https://vesinhcongnghiep.com.vn/uploads/images/product/350_350/${product.image_link}` }} 
+            source={{ uri: `${imgDirUrl}/${service.image_link}` }} 
           />
         </View>
         <View style={styles.detail}>
           <Text style={styles.name} numberOfLines={2}>
-            { product.vn_name }
+            { service.vn_name }
           </Text>
-          <Text style={styles.code} numberOfLines={1}>
-            MSP: { product.vn_title }
+          <Text style={styles.code} numberOfLines={2}>
+            { service.vn_sapo }
           </Text>
         </View>
       </View>
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     margin: 7.5,
     borderRadius: 3,
-    width: width / 2 - 22.5,
+    width: width - 30,
     height: null
   },
   imgBox: {
@@ -48,10 +49,10 @@ const styles = StyleSheet.create({
   },
   img: {
     flex: 1,
-    height: width / 2 - 30,
-    width: null,
-    resizeMode: "contain",
-    marginBottom: 10,
+    width: width - 50,
+    height: width / 2,
+    resizeMode: "cover",
+    marginBottom: 10
   },
   detail: {
     alignItems: 'flex-start',
@@ -61,7 +62,6 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     marginBottom: 5,
     textAlign: 'left',
-    height: 35
   },
   code: {
     textAlign: 'left',

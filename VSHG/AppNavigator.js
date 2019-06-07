@@ -4,12 +4,14 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import Homepage from './screens/Homepage';
 import Chemistries from './screens/Chemistries';
-import Services from './screens/Services';
 import Contact from './screens/Contact';
 
 import Categories from './screens/Categories';
 import Products from './screens/Products';
 import ProductDetail from './screens/ProductDetail.js';
+
+import Services from './screens/Services';
+import ServiceDetail from './screens/ServiceDetail';
 
 const HomepageStack = createStackNavigator({
   Homepage
@@ -42,7 +44,8 @@ ProductsStack.navigationOptions = {
 }
 
 const ServicesStack = createStackNavigator({
-  Services
+  Services,
+  ServiceDetail
 });
 ServicesStack.navigationOptions = {
   tabBarLabel: 'Dịch vụ',

@@ -9,10 +9,10 @@ import callApi from './../callApi';
 export default class Products extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      headerTitle: <Header propsKeyword={navigation.getParam('categoryName')} />,
+      headerTitle: <Header titleScreen={navigation.getParam('categoryName')} />,
       headerStyle: { backgroundColor: '#377ECC', height: 60 },
       headerTintColor: 'white',
-      headerBackTitle: 'Trở về'
+      headerBackTitleStyle: { display: 'none' }
     }
   }
 
@@ -96,7 +96,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 7.5,
   },
   wrapper: {
-    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between'
   },
   empty: {
     padding: 15,
