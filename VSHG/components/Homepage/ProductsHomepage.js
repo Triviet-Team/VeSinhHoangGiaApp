@@ -2,39 +2,41 @@ import React from 'react';
 import { View, StyleSheet, FlatList, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
-import ServiceListItem from './../ServiceListItem';
+import ProductListItem from './../ProductListItem';
 
-export default class ServicesHomepage extends React.Component {
+export default class ProductsHomepage extends React.Component {
 
   render() {
-    const { navigation, services } = this.props;
+    const { navigation, products } = this.props;
 
     return (
       <View style={styles.container}>
         <View style={styles.title}>
-          <Text style={styles.titleLarge}>Dịch vụ nổi bật</Text>
+          <Text style={styles.titleLarge}>Sản phẩm nổi bật</Text>
           <TouchableOpacity
             style={styles.titleSmall}
-            onPress={() => navigation.navigate('Services')}
+            onPress={() => navigation.navigate('AllProducts')}
           >
             <Text style={{ color: '#377ECC', marginRight: 5 }}>
-              Tất cả dịch vụ
+              Tất cả sản phẩm
             </Text>
             <Icon name="plus" size={18} color="#377ECC" />
           </TouchableOpacity>
         </View>
         {
-          (services !== null && services.length > 0)
+          (products !== null && products.length > 0)
           && <FlatList 
-              data={services}
+              style={styles.scrollView}
+              data={products}
+              numColumns={2}
               renderItem={({ item }) => (
                 <View style={styles.wrapper}>
-                  <ServiceListItem 
-                    service={item}
-                    onPress={() => navigation.navigate('ServiceDetail', {
-                      serviceName: item.vn_name,
-                      serviceImage: item.image_link,
-                      serviceDesc: item.vn_detail
+                  <ProductListItem 
+                    product={item}
+                    onPress={() => navigation.navigate('ProductDetail', {
+                      productName: item.vn_name,
+                      productImage: item.image_link,
+                      productDesc: item.vn_detail
                     })}
                   />
                 </View>
@@ -44,7 +46,7 @@ export default class ServicesHomepage extends React.Component {
         }
         <TouchableOpacity
           style={styles.titleAll}
-          onPress={() => navigation.navigate('Services')}
+          onPress={() => navigation.navigate('AllProducts')}
         >
           <Text style={styles.titleAllText}>
             Xem tất cả sản phẩm
@@ -59,11 +61,15 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'stretch',
     justifyContent: 'center',
-    backgroundColor: 'white',
-    marginBottom: 20,
+    backgroundColor: '#fff'
+  },
+  scrollView: {
+    paddingHorizontal: 7.5,
   },
   wrapper: {
-    paddingHorizontal: 7.5,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between'
   },
   title: {
     flexDirection: 'row',
@@ -92,4 +98,4 @@ const styles = StyleSheet.create({
     fontSize: 16,
     borderRadius: 5,
   }
-});
+})

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, FlatList, RefreshControl } from 'react-native';
+import { View, StyleSheet, FlatList, RefreshControl, Dimensions } from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 import CategoryListItem from '../components/CategoryListItem';
@@ -35,7 +35,7 @@ export default class Categories extends React.Component {
   fetchProduct = () => {
     callApi('product/category', 'GET', null).then(res => {
       const categoryPublic = res.data
-        .filter(cate => {
+      .filter(cate => {
           return cate.status === "1" && cate.pid === "173"
         })
         .sort((a, b) => parseInt(a.id) - parseInt(b.id));
@@ -72,6 +72,7 @@ export default class Categories extends React.Component {
           renderItem={({ item }) => (
             <View style={styles.wrapper}>
               <CategoryListItem 
+                width={Dimensions.get('window').width / 2 - 15}
                 category={item}
                 onPress={() => navigation.navigate('Products', {
                   categoryId: item.id,

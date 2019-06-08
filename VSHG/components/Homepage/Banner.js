@@ -10,7 +10,7 @@ export default function Banner(props) {
 
   return (
 
-    <Container style={styles.banner}>
+    <View style={styles.banner}>
       <View>
         <DeckSwiper
           ref={(c) => this._deckSwiper = c}
@@ -35,7 +35,7 @@ export default function Banner(props) {
         <Icon name="chevron-right" size={40} color="#fff" />
       </Button>
     </View>
-    </Container>
+    </View>
   )
 }
 

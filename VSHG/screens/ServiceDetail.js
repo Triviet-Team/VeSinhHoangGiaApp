@@ -1,8 +1,10 @@
 import React from 'react';
-import { ScrollView, Text, Image, StyleSheet, View, TouchableOpacity, Linking } from 'react-native';
+import { ScrollView, Text, Image, StyleSheet, View, TouchableOpacity, Linking, Dimensions } from 'react-native';
 import HTML from 'react-native-render-html';
 
 import Header from '../components/Header';
+
+const { width } = Dimensions.get('window');
 
 export default class ProductDetail extends React.Component {
   static navigationOptions = () => {
@@ -20,6 +22,7 @@ export default class ProductDetail extends React.Component {
     const image = navigation.getParam('serviceImage')
     const description = navigation.getParam('serviceDesc');
     const imgDirUrl = 'https://vesinhcongnghiep.com.vn/uploads/images/news/350_350';
+
     
     return (
       <View>
@@ -31,7 +34,7 @@ export default class ProductDetail extends React.Component {
             </View>
 
             <View style={styles.description}>
-              <HTML html={description} />
+              <HTML html={description} imagesMaxWidth={width - 30} />
             </View>
           </View>
         </ScrollView>

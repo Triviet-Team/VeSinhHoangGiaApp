@@ -3,6 +3,8 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import Homepage from './screens/Homepage';
+import AllProducts from './screens/AllProducts';
+
 import Chemistries from './screens/Chemistries';
 import Contact from './screens/Contact';
 
@@ -14,7 +16,11 @@ import Services from './screens/Services';
 import ServiceDetail from './screens/ServiceDetail';
 
 const HomepageStack = createStackNavigator({
-  Homepage
+  Homepage,
+  ProductDetail,
+  ServiceDetail,
+  Products,
+  AllProducts
 });
 HomepageStack.navigationOptions = {
   tabBarLabel: 'Trang chủ',

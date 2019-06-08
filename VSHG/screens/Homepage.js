@@ -1,9 +1,14 @@
 import React from 'react';
-import { StyleSheet, Image, View, Text, Dimensions, ScrollView } from 'react-native';
+import { StyleSheet, ScrollView, RefreshControl } from 'react-native';
+import Spinner from 'react-native-loading-spinner-overlay';
+
+import callApi from './../callApi';
 
 import Header from './../components/Header';
 import Banner from './../components/Homepage/Banner';
-import ServiceHomepage from './../components/Homepage/ServicesHomepage';
+import ServicesHomepage from './../components/Homepage/ServicesHomepage';
+import CategoriesHomepage from './../components/Homepage/CategoriesHomepage';
+import ProductsHomepage from './../components/Homepage/ProductsHomepage';
 
 const cards = [
   {
@@ -30,17 +35,106 @@ export default class Homepage extends React.Component {
     super(props);
 
     this.state = {
-      banners: cards
+      banners: cards,
+      categories: [],
+      services: [],
+      products: [],
+      spinner: false,
+      refreshing: false,
     }
   }
 
+  componentDidMount() {
+    this.setState({ spinner: true })
+    this.onFetchCategories();
+    this.onFetchServices();
+    this.onFetchProducts();
+  }
+
+  onFetchCategories = () => {
+    this.setState({ spinner: true });
+
+    callApi('product/category', 'GET', null).then(res => {
+      const categoriesHomepage = res.data
+        .filter(cate => cate.status === "1" && cate.pid === "173")
+        .sort((a, b) => parseInt(b.id) - parseInt(a.id));
+
+      this.setState({
+        categories: categoriesHomepage,
+        spinner: false,
+        refreshing: false,
+      })
+    })
+  }
+
+  onFetchServices = () => {
+    callApi('service/allservice', 'GET', null).then(res => {
+      const serviceFeature = res.data
+        .filter(service => service.home === '1')
+        .splice(0, 6)
+        .sort((a, b) => parseInt(b.id) - parseInt(a.id));
+
+      this.setState({
+        services: serviceFeature,
+        spinner: false,
+        refreshing: false,
+      })
+    })
+  }
+
+  onFetchProducts = () => {
+    this.setState({ spinner: true });
+
+    callApi('product/allproduct', 'GET', null).then(res => {
+      const data = res.data
+        .filter(product => product.is_home === '1' && product.cid !== '180')
+        .splice(0, 10)
+        .sort((a, b) => parseInt(b.id) - parseInt(a.id));
+
+      this.setState({
+        products: data,
+        spinner: false,
+        refreshing: false,
+      })
+    })
+  }
+
+  _onRefresh = () => {
+    this.setState({refreshing: true});
+    this.onFetchCategories();
+  };
+
   render() {
-    const { banners } = this.state;
+    const { banners, categories, services, products } = this.state;
 
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView 
+        style={styles.container}
+        refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={this._onRefresh}
+          />
+        }
+      >
+        <Spinner
+          visible={this.state.spinner}
+          textContent={'Đang tải...'}
+          textStyle={{ color: '#fff' }}
+        />
         <Banner banners={banners} />
-        <ServiceHomepage />
+        <CategoriesHomepage 
+          navigation={this.props.navigation} 
+          categories={categories}
+        />
+        <ServicesHomepage 
+          navigation={this.props.navigation} 
+          services={services}
+        />
+        <ProductsHomepage 
+          navigation={this.props.navigation} 
+          products={products}
+        />
       </ScrollView>
     )
   }

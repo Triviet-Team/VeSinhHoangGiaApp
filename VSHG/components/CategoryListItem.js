@@ -1,14 +1,13 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 
-
 export default function CategoryListItem(props) {  
   const { category, onPress } = props;
   const imgDirName = 'https://vesinhcongnghiep.com.vn/uploads/images/productcategory/350_250'
 
   return (
     <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
-      <View style={styles.box}>
+      <View style={[styles.box, { width: props.width }]}>
         <Image 
           style={styles.img} 
           source={{ uri: `${imgDirName}/${category.image_link}` }} 
@@ -37,5 +36,6 @@ const styles = StyleSheet.create({
   },
   name: {
     textAlign: 'center',
+    lineHeight: 20,
   }
 })

@@ -3,13 +3,13 @@ import { View, StyleSheet, FlatList, Text } from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 import ProductListItem from '../components/ProductListItem';
-import Header from './../components/Header';
-import callApi from './../callApi';
+import Header from '../components/Header';
+import callApi from '../callApi';
 
-export default class Chemistries extends React.Component {
+export default class AllProducts extends React.Component {
   static navigationOptions = () => {
     return {
-      headerTitle: <Header titleScreen="Hóa chất" />,
+      headerTitle: <Header titleScreen="Tất cả sản phẩm" />,
       headerStyle: { backgroundColor: '#377ECC', height: 60 },
       headerTintColor: 'white',
       headerBackTitleStyle: { display: 'none' }
@@ -20,7 +20,7 @@ export default class Chemistries extends React.Component {
     super(props);
 
     this.state = {
-      chemistries: [],
+      products: [],
       spinner: false
     }
   }
@@ -28,16 +28,14 @@ export default class Chemistries extends React.Component {
   
   componentDidMount() {
     this.setState({ spinner: true });
-
+    
     callApi('product/allproduct', 'GET', null).then(res => {
       const data = res.data
-        .filter(chemistry => {
-          return chemistry.cid === '180' && chemistry.status === '1'
-        })
+        .filter(product => product.cid !== '180')
         .sort((a, b) => parseInt(b.id) - parseInt(a.id));
 
       this.setState({
-        chemistries: data,
+        products: data,
         spinner: false
       })
     })
@@ -45,7 +43,7 @@ export default class Chemistries extends React.Component {
 
   render() {
     const { navigation } = this.props;
-    const { chemistries } = this.state;
+    const { products } = this.state;
 
     return (
       <View style={styles.container}>
@@ -55,10 +53,10 @@ export default class Chemistries extends React.Component {
           textStyle={{ color: '#fff' }}
         />
         {
-          (chemistries !== null && chemistries.length > 0)
+          (products !== null && products.length > 0)
           ? <FlatList 
             style={styles.scrollView}
-            data={chemistries}
+            data={products}
             numColumns={2}
             renderItem={({ item }) => (
               <View style={styles.wrapper}>
