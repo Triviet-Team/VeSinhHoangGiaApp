@@ -18,7 +18,7 @@ export default class ProductsHomepage extends React.Component {
             onPress={() => navigation.navigate('AllProducts')}
           >
             <Text style={{ color: '#377ECC', marginRight: 5 }}>
-              Tất cả sản phẩm
+              Tất cả
             </Text>
             <Icon name="plus" size={18} color="#377ECC" />
           </TouchableOpacity>

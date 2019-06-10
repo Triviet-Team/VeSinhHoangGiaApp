@@ -1,63 +1,23 @@
 import React from 'react';
-import { SearchBar } from 'react-native-elements';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-export default class Header extends React.Component  {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      keyword: '',
-      isDisplaySearchForm: false
-    }
-  }
+export default function Header(props)  {
+  const { titleScreen, onPress } = props;
 
-  onSearch = keyword => {
-    this.setState({ keyword });
-  }
-
-  onDisplaySearchForm = () => {
-    this.setState({
-      isDisplaySearchForm: !this.state.isDisplaySearchForm
-    })
-  }
-
-  render() {
-    const { keyword, isDisplaySearchForm } = this.state;
-    const { titleScreen } = this.props;
-
-    console.log(keyword);
-
-    return (
-      <View style={styles.container}>
-        <Text style={styles.logo}>{ titleScreen }</Text>
-        <TouchableOpacity onPress={this.onDisplaySearchForm}>
-          <Icon 
-            name={isDisplaySearchForm ? 'md-close' : 'ios-search' }
-            size={30} 
-            color="#fff" 
-          />
-        </TouchableOpacity>
-        <SearchBar
-          placeholder="Nhập từ khóa..."
-          onChangeText={this.onSearch}
-          value={keyword}
-          lightTheme={true}
-          containerStyle={{
-            backgroundColor: 'transparent', 
-            width: isDisplaySearchForm ? '95%' : 0, 
-            borderTopWidth: 0, 
-            borderBottomWidth: 0,
-            position: 'absolute',
-            top: -12.5,
-          }}
-          inputContainerStyle={{backgroundColor: 'rgb(255, 255, 255)'}}
-          inputStyle={{color: '#000'}}
+  return (
+    <View style={styles.container}>
+      <Text style={styles.logo}>{ titleScreen }</Text>
+      <TouchableOpacity onPress={onPress}>
+        <Icon 
+          name="ios-search"
+          size={30} 
+          color="#fff" 
         />
-      </View>
-    )
-  }
+      </TouchableOpacity>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({

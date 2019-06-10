@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, Image, Dimensions } from 'react-native';
-import { DeckSwiper, Card, CardItem, Button, Container, View } from 'native-base';
+import { StyleSheet, Image, Dimensions, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
+import Swiper from 'react-native-swiper';
 
 const { width } = Dimensions.get('window');
 
@@ -11,30 +11,24 @@ export default function Banner(props) {
   return (
 
     <View style={styles.banner}>
-      <View>
-        <DeckSwiper
-          ref={(c) => this._deckSwiper = c}
-          dataSource={banners}
-          renderItem={item =>
-            <Card style={{ elevation: 3 }}>
-              <CardItem cardBody>
-                <Image 
-                  style={{ height: width / 2, flex: 1 }} 
-                  source={{ uri: item.image }}  
-                />
-              </CardItem>
-            </Card>
-          }
-        />
-      </View>
-      <View style={styles.bannerButton}>
-      <Button style={styles.button} onPress={() => this._deckSwiper._root.swipeLeft()}>
-        <Icon name="chevron-left" size={40} color="#fff" />
-      </Button>
-      <Button style={styles.button} onPress={() => this._deckSwiper._root.swipeRight()}>
-        <Icon name="chevron-right" size={40} color="#fff" />
-      </Button>
-    </View>
+      
+      <Swiper 
+        showsButtons={true}
+        nextButton={ <Icon name="chevron-right" size={40} color="#377ECC" /> }
+        prevButton={ <Icon name="chevron-left" size={40} color="#377ECC" /> }
+        loop={true}
+        autoplay={true}
+        autoplayTimeout={5}
+        showsPagination={false}
+      >
+        { banners.map(banner => {
+          return <Image 
+            key={banner.id}
+            style={{ height: width / 2, flex: 1 }} 
+            source={{ uri: `https://vesinhcongnghiep.com.vn/uploads/images/ads/${banner.image_link}` }}  
+          />
+        })}
+      </Swiper>
     </View>
   )
 }

@@ -15,12 +15,15 @@ import ProductDetail from './screens/ProductDetail.js';
 import Services from './screens/Services';
 import ServiceDetail from './screens/ServiceDetail';
 
+import Search from './screens/Search';
+
 const HomepageStack = createStackNavigator({
   Homepage,
   ProductDetail,
   ServiceDetail,
   Products,
-  AllProducts
+  AllProducts,
+  Search
 });
 HomepageStack.navigationOptions = {
   tabBarLabel: 'Trang chủ',
@@ -36,7 +39,8 @@ HomepageStack.navigationOptions = {
 const ProductsStack = createStackNavigator({
   Categories,
   Products,
-  ProductDetail
+  ProductDetail,
+  Search
 });
 ProductsStack.navigationOptions = {
   tabBarLabel: 'Danh mục',
@@ -51,7 +55,8 @@ ProductsStack.navigationOptions = {
 
 const ServicesStack = createStackNavigator({
   Services,
-  ServiceDetail
+  ServiceDetail,
+  Search
 });
 ServicesStack.navigationOptions = {
   tabBarLabel: 'Dịch vụ',
@@ -65,7 +70,8 @@ ServicesStack.navigationOptions = {
 }
 
 const ChemistriesStack = createStackNavigator({
-  Chemistries
+  Chemistries,
+  Search
 });
 ChemistriesStack.navigationOptions = {
   tabBarLabel: 'Hóa chất',
@@ -79,7 +85,8 @@ ChemistriesStack.navigationOptions = {
 }
 
 const ContactStack = createStackNavigator({
-  Contact
+  Contact,
+  Search
 });
 ContactStack.navigationOptions = {
   tabBarLabel: 'Liên hệ',

@@ -1,6 +1,7 @@
 import React from 'react';
 import { ScrollView, Text, Image, StyleSheet, View, TouchableOpacity, Linking, Dimensions } from 'react-native';
 import HTML from 'react-native-render-html';
+import callApi from "./../callApi";
 
 import Header from '../components/Header';
 
@@ -16,14 +17,35 @@ export default class ProductDetail extends React.Component {
     }
   }
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      contact: {}
+    }
+  }
+
+  componentDidMount() {
+    this.onFetchContact();
+  }
+
+  onFetchContact = () => {
+    callApi('config', 'GET', null).then(res => {
+      const contactJsonMode = JSON.parse(res.data);
+
+      this.setState({
+        contact: contactJsonMode,
+      })
+    })
+  }
+
   render() {
     const { navigation } = this.props;
+    const { contact } = this.state;
     const name = navigation.getParam('serviceName')
     const image = navigation.getParam('serviceImage')
     const description = navigation.getParam('serviceDesc');
     const imgDirUrl = 'https://vesinhcongnghiep.com.vn/uploads/images/news/350_350';
 
-    
     return (
       <View>
         <ScrollView>
@@ -39,8 +61,8 @@ export default class ProductDetail extends React.Component {
           </View>
         </ScrollView>
         <TouchableOpacity activeOpacity={0.9} style={styles.order}>
-          <Text style={styles.orderText} onPress={ () => Linking.openURL('tel:0912345678')}>
-            LIÊN HỆ ĐẶT DỊCH VU
+          <Text style={styles.orderText} onPress={ () => Linking.openURL(`tel:${contact.m_phone}`)}>
+            LIÊN HỆ ĐẶT DỊCH VỤ NGAY
           </Text>
         </TouchableOpacity>
       </View>
@@ -83,7 +105,9 @@ const styles = StyleSheet.create({
   orderText: {
     color: '#fff',
     fontSize: 16,
-    fontWeight: '600'
+    fontWeight: '600',
+    width: '100%',
+    textAlign: 'center'
   },
   description: {
     padding: 15,
