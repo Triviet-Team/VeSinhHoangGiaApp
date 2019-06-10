@@ -4,12 +4,13 @@ import Spinner from 'react-native-loading-spinner-overlay';
 
 import ProductListItem from '../components/ProductListItem';
 import HeaderSearch from '../components/HeaderSearch';
+import Header from '../components/Header';
 import callApi from '../callApi';
 
 export default class Search extends React.Component {
   static navigationOptions = () => {
     return {
-      headerTitle: <HeaderSearch onSearch={this.onSearch} onChange={this.onChange} />,
+      headerTitle: <Header titleScreen="Tìm kiếm" />,
       headerStyle: { backgroundColor: '#377ECC', height: 60 },
       headerTintColor: 'white',
       headerBackTitleStyle: { display: 'none' }
@@ -29,20 +30,24 @@ export default class Search extends React.Component {
   onChange = keyword => {
     this.setState({ keyword });
     console.log(keyword);
+    
   }
 
   onSearch = () => {
-    const { products, keyword } = this.state;
+    const { keyword } = this.state;
+    this.setState({ spinner: true })
 
     callApi('product/allproduct', 'GET', null).then(res => {
-
       if (keyword) {
         const productsFiltered = res.data
         .filter(product => product.is_home === '1' && product.cid !== '180')
         .filter((product) => {
           return product.vn_name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1
         });
-        this.setState({ products: productsFiltered })
+        this.setState({ 
+          products: productsFiltered,
+          spinner: false 
+        })
       }
     })
   }
@@ -60,6 +65,7 @@ export default class Search extends React.Component {
           textContent={'Đang tải...'}
           textStyle={{ color: '#fff' }}
         />
+        <HeaderSearch onSearch={this.onSearch} onChange={this.onChange} keyword />
         {
           (products !== null && products.length > 0)
           ? <FlatList 

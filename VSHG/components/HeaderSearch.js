@@ -1,14 +1,10 @@
 import React from 'react';
 import { SearchBar } from 'react-native-elements';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Keyboard } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 
 export default class HeaderSearch extends React.Component  {
-  handleChange(e) {
-    this.props.onChange(e.target.value);
-  }
-
   render() {
     const { onSearch, onChange, keyword } = this.props;
 
@@ -17,7 +13,7 @@ export default class HeaderSearch extends React.Component  {
         <SearchBar
           placeholder="Nhập từ khóa..."
           value={keyword} 
-          onChangeText={this.handleChange}
+          onChangeText={onChange}
           name="keyword"
           lightTheme={true}
           containerStyle={{
