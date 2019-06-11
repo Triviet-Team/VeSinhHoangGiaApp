@@ -9,7 +9,7 @@ import callApi from './../callApi';
 export default class Products extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      headerTitle: <Header titleScreen={navigation.getParam('categoryName')} />,
+      headerTitle: <Header titleScreen={navigation.getParam('categoryName')} onPress={() => navigation.navigate('Search')}  />,
       headerStyle: { backgroundColor: '#377ECC', height: 60 },
       headerTintColor: 'white',
       headerBackTitleStyle: { display: 'none' }

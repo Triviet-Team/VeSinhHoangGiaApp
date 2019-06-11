@@ -9,9 +9,9 @@ import callApi from "./../callApi";
 import Header from "../components/Header";
 
 export default class Contact extends React.Component {
-  static navigationOptions = () => {
+  static navigationOptions = ({ navigation }) => {
     return {
-      headerTitle: <Header titleScreen="Thông tin liên hệ" />,
+      headerTitle: <Header titleScreen="Thông tin liên hệ" onPress={() => navigation.navigate('Search')}  />,
       headerStyle: { backgroundColor: "#377ECC" },
       headerBackTitleStyle: { display: "none" }
     };

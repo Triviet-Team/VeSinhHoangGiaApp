@@ -7,9 +7,9 @@ import Header from './../components/Header';
 import ServiceListItem from './../components/ServiceListItem';
 
 export default class Services extends React.Component {
-  static navigationOptions = () => {
+  static navigationOptions = ({ navigation }) => {
     return {
-      headerTitle: <Header titleScreen="Dịch vụ vệ sinh" />,
+      headerTitle: <Header titleScreen="Dịch vụ vệ sinh"  onPress={() => navigation.navigate('Search')} />,
       headerStyle: { backgroundColor: '#377ECC' },
       headerTintColor: 'white',
       headerBackTitleStyle: { display: 'none' }

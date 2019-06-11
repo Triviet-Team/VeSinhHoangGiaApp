@@ -7,11 +7,11 @@ import Header from './../components/Header';
 import callApi from './../callApi';
 
 export default class Categories extends React.Component {
-  static navigationOptions = () => {
+  static navigationOptions = ({ navigation }) => {
     return {
-      headerTitle: <Header titleScreen="Danh mục sản phẩm" />,
+      headerTitle: <Header titleScreen="Danh mục sản phẩm" onPress={() => navigation.navigate('Search')}  />,
       headerStyle: { backgroundColor: '#377ECC', height: 60 },
-      headerBackTitleStyle: { display: 'none' }
+      
     }
   }
 

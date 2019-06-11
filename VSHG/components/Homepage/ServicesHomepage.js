@@ -81,6 +81,7 @@ const styles = StyleSheet.create({
   titleAll: {
     alignItems: 'center',
     marginVertical: 15,
+    borderRadius: 5,
   },
   titleAllText: { 
     backgroundColor: '#377ECC',

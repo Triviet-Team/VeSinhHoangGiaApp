@@ -24,12 +24,13 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     paddingHorizontal: 15,
-    justifyContent: 'space-between',
-    flex: 1
+    flex: 1,
+    alignItems: 'stretch',
   },
   logo: {
     fontSize: 20,
     fontWeight: '600',
-    color: '#fff'
+    color: '#fff',
+    flex: 1
   }
 })

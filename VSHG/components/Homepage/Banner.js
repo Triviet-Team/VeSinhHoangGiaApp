@@ -9,9 +9,7 @@ export default function Banner(props) {
   const { banners } = props;
 
   return (
-
     <View style={styles.banner}>
-      
       <Swiper 
         showsButtons={true}
         nextButton={ <Icon name="chevron-right" size={40} color="#377ECC" /> }

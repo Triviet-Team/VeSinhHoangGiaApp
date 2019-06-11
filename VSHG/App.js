@@ -2,6 +2,7 @@ import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { StyleSheet } from 'react-native';
 import AppNavigator from './AppNavigator';
+import Constants from 'expo-constants'
 
 const AppContainer = createAppContainer(AppNavigator)
 

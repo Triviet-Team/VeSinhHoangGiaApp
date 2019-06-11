@@ -1,55 +1,33 @@
 import React from 'react';
 import { SearchBar } from 'react-native-elements';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { Dimensions } from 'react-native';
 
+const { width } = Dimensions.get('window')
 
-export default class HeaderSearch extends React.Component  {
-  render() {
-    const { onSearch, onChange, keyword } = this.props;
+export default function HeaderSearch(props) {
+  const { onSearch, onChange, keyword } = props;
 
-    return (
-      <View style={styles.container}>
-        <SearchBar
-          placeholder="Nhập từ khóa..."
-          value={keyword} 
-          onChangeText={onChange}
-          name="keyword"
-          lightTheme={true}
-          containerStyle={{
-            backgroundColor: 'transparent', 
-            borderTopWidth: 0, 
-            borderBottomWidth: 0,
-            width: '90%'
-          }}
-          autoFocus
-          onSubmitEditing={onSearch}
-          inputContainerStyle={{backgroundColor: 'rgb(255, 255, 255)'}}
-          inputStyle={{color: '#000'}}
-        />
-        <TouchableOpacity onPress={onSearch}>
-          <Icon 
-            name='ios-search'
-            size={30} 
-            color="#fff" 
-          />
-        </TouchableOpacity>
-      </View>
-    )
-  }
+  return (
+    <SearchBar
+      placeholder="Nhập tên sản phẩm, dịch vụ..."
+      value={keyword} 
+      onChangeText={onChange}
+      name="keyword"
+      lightTheme={true}
+      containerStyle={{
+        backgroundColor: '#fff', 
+        borderTopWidth: 0, 
+        borderBottomWidth: 1,
+        borderBottomColor: '#f9f9f9',
+        position: 'relative',
+        top: 0,
+        width: width,
+        zIndex: 1000,
+      }}
+      autoFocus
+      onSubmitEditing={onSearch}
+      inputContainerStyle={{backgroundColor: 'rgb(255, 255, 255)', width: width - 30, height: 40 }}
+      inputStyle={{color: '#000'}}
+    />
+  )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    paddingHorizontal: 15,
-    justifyContent: 'space-between',
-    flex: 1,
-    alignItems: 'center',
-  },
-  logo: {
-    fontSize: 20,
-    fontWeight: '600',
-    color: '#fff'
-  }
-})

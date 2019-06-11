@@ -27,6 +27,7 @@ export default class CategoriesHomepage extends React.Component {
           (categories !== null && categories.length > 0)
           && <FlatList 
               horizontal
+              showsHorizontalScrollIndicator
               style={styles.scrollView}
               data={categories}
               initialNumToRender={4}
