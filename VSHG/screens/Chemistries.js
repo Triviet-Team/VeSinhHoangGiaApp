@@ -9,7 +9,10 @@ import callApi from './../callApi';
 export default class Chemistries extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      headerTitle: <Header titleScreen="Hóa chất" onPress={() => navigation.navigate('Search')}  />,
+      headerTitle: <Header 
+        titleScreen="Hóa chất" 
+        onPress={() => navigation.navigate('Search')}  
+      />,
       headerStyle: { backgroundColor: '#377ECC', height: 60 },
       headerTintColor: 'white',
       headerBackTitleStyle: { display: 'none' }

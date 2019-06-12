@@ -8,7 +8,10 @@ import Header from './../components/Header';
 export default class ProductDetail extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      headerTitle: <Header titleScreen="Chi tiết sản phẩm" onPress={() => navigation.navigate('Search')}  />,
+      headerTitle: <Header 
+        titleScreen="Chi tiết sản phẩm" 
+        onPress={() => navigation.navigate('Search')}  
+      />,
       headerStyle: { backgroundColor: '#377ECC', height: 60 },
       headerTintColor: 'white',
       headerBackTitleStyle: { display: 'none' }

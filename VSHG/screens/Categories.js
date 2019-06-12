@@ -28,7 +28,6 @@ export default class Categories extends React.Component {
   
   componentDidMount() {
     this.setState({ spinner: true })
-
     this.fetchProduct();
   }
 
@@ -39,6 +38,7 @@ export default class Categories extends React.Component {
           return cate.status === "1" && cate.pid === "173"
         })
         .sort((a, b) => parseInt(a.id) - parseInt(b.id));
+        
       this.setState({
         categories: categoryPublic,
         spinner: false,

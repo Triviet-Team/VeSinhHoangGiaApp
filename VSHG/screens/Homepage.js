@@ -14,7 +14,10 @@ import ProductsHomepage from './../components/Homepage/ProductsHomepage';
 export default class Homepage extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      headerTitle: <Header titleScreen="Vệ sinh Hoàng Gia" onPress={() => navigation.navigate('Search')}  />,
+      headerTitle: <Header 
+        titleScreen="Vệ sinh Hoàng Gia" 
+        onPress={() => navigation.navigate('Search')}  
+      />,
       headerStyle: { backgroundColor: '#377ECC', height: 60 },
       headerBackTitleStyle: { display: 'none' }
     }
@@ -114,34 +117,35 @@ export default class Homepage extends React.Component {
   };
 
   render() {
-    const { banners, categories, services, products } = this.state;
+    const { banners, categories, services, products, refreshing, spinner } = this.state;
+    const { navigation } = this.props
 
     return (
       <ScrollView 
         style={styles.container}
         refreshControl={
           <RefreshControl
-            refreshing={this.state.refreshing}
+            refreshing={refreshing}
             onRefresh={this._onRefresh}
           />
         }
       >
         <Spinner
-          visible={this.state.spinner}
+          visible={spinner}
           textContent={'Đang tải...'}
           textStyle={{ color: '#fff' }}
         />
         <Banner banners={banners} />
         <CategoriesHomepage 
-          navigation={this.props.navigation} 
+          navigation={navigation} 
           categories={categories}
         />
         <ServicesHomepage 
-          navigation={this.props.navigation} 
+          navigation={navigation} 
           services={services}
         />
         <ProductsHomepage 
-          navigation={this.props.navigation} 
+          navigation={navigation} 
           products={products}
         />
       </ScrollView>

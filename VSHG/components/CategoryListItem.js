@@ -12,7 +12,9 @@ export default function CategoryListItem(props) {
           style={styles.img} 
           source={{ uri: `${imgDirName}/${category.image_link}` }} 
         />
-        <Text style={styles.name} numberOfLines={2}>{ category.vn_name }</Text>
+        <Text style={styles.name} numberOfLines={2}>
+          { category.vn_name }
+        </Text>
       </View>
     </TouchableOpacity>
   )

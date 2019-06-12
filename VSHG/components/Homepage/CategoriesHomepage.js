@@ -30,7 +30,6 @@ export default class CategoriesHomepage extends React.Component {
               showsHorizontalScrollIndicator
               style={styles.scrollView}
               data={categories}
-              initialNumToRender={4}
               renderItem={({ item }) => (
                 <View style={styles.wrapper}>
                   <CategoryListItem 

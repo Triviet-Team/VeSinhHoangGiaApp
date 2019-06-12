@@ -7,6 +7,7 @@ const { width } = Dimensions.get('window');
 
 export default function Banner(props) {
   const { banners } = props;
+  const imgDirName = 'https://vesinhcongnghiep.com.vn/uploads/images/ads';
 
   return (
     <View style={styles.banner}>
@@ -21,9 +22,9 @@ export default function Banner(props) {
       >
         { banners.map(banner => {
           return <Image 
-            key={banner.id}
+            key={ banner.id }
             style={{ height: width / 2, flex: 1 }} 
-            source={{ uri: `https://vesinhcongnghiep.com.vn/uploads/images/ads/${banner.image_link}` }}  
+            source={{ uri: `${imgDirName}/${banner.image_link}` }}  
           />
         })}
       </Swiper>
@@ -36,19 +37,5 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     height: width / 2,
     flex: 1,
-  },
-  bannerButton: { 
-    flexDirection: "row", 
-    flex: 1, 
-    position: "absolute", 
-    top: width / 6 - 10, 
-    left: 0, 
-    right: 0, 
-    justifyContent: 'space-between', 
-    padding: 15 
-  },
-  button: {
-    backgroundColor: 'transparent',
-    elevation: 0
-  },
+  }
 });

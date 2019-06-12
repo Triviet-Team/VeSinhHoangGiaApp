@@ -10,7 +10,10 @@ const { width } = Dimensions.get('window');
 export default class ProductDetail extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      headerTitle: <Header titleScreen="Chi tiết dịch vụ"  onPress={() => navigation.navigate('Search')} />,
+      headerTitle: <Header 
+        titleScreen="Chi tiết dịch vụ"  
+        onPress={() => navigation.navigate('Search')} 
+      />,
       headerStyle: { backgroundColor: '#377ECC', height: 60 },
       headerTintColor: 'white',
       headerBackTitleStyle: { display: 'none' }
@@ -30,10 +33,8 @@ export default class ProductDetail extends React.Component {
 
   onFetchContact = () => {
     callApi('config', 'GET', null).then(res => {
-      const contactJsonMode = JSON.parse(res.data);
-
       this.setState({
-        contact: contactJsonMode,
+        contact: JSON.parse(res.data),
       })
     })
   }
@@ -61,7 +62,10 @@ export default class ProductDetail extends React.Component {
           </View>
         </ScrollView>
         <TouchableOpacity activeOpacity={0.9} style={styles.order}>
-          <Text style={styles.orderText} onPress={ () => Linking.openURL(`tel:${contact.m_phone}`)}>
+          <Text 
+            style={styles.orderText} 
+            onPress={ () => Linking.openURL(`tel:${contact.m_phone}`)}
+          >
             LIÊN HỆ ĐẶT DỊCH VỤ NGAY
           </Text>
         </TouchableOpacity>

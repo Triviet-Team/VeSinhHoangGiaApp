@@ -9,7 +9,10 @@ import ServiceListItem from './../components/ServiceListItem';
 export default class Services extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      headerTitle: <Header titleScreen="Dịch vụ vệ sinh"  onPress={() => navigation.navigate('Search')} />,
+      headerTitle: <Header 
+        titleScreen="Dịch vụ vệ sinh"  
+        onPress={() => navigation.navigate('Search')} 
+      />,
       headerStyle: { backgroundColor: '#377ECC' },
       headerTintColor: 'white',
       headerBackTitleStyle: { display: 'none' }
@@ -42,12 +45,12 @@ export default class Services extends React.Component {
 
   render() {
     const { navigation } = this.props;
-    const { services } = this.state;
+    const { services, spinner } = this.state;
 
     return (
       <View style={styles.container}>
         <Spinner
-          visible={this.state.spinner}
+          visible={spinner}
           textContent={'Đang tải...'}
           textStyle={{ color: '#fff' }}
         />

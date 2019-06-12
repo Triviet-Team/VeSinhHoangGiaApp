@@ -11,7 +11,10 @@ import Header from "../components/Header";
 export default class Contact extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      headerTitle: <Header titleScreen="Thông tin liên hệ" onPress={() => navigation.navigate('Search')}  />,
+      headerTitle: <Header 
+        titleScreen="Thông tin liên hệ" 
+        onPress={() => navigation.navigate('Search')}  
+      />,
       headerStyle: { backgroundColor: "#377ECC" },
       headerBackTitleStyle: { display: "none" }
     };
@@ -61,6 +64,7 @@ export default class Contact extends React.Component {
 
   render() {
     const { contact, spinner, isActiveContactButton, aboutus } = this.state;
+    
     return (
       <View>
         <Spinner

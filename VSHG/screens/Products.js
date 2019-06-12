@@ -9,7 +9,10 @@ import callApi from './../callApi';
 export default class Products extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      headerTitle: <Header titleScreen={navigation.getParam('categoryName')} onPress={() => navigation.navigate('Search')}  />,
+      headerTitle: <Header 
+        titleScreen={navigation.getParam('categoryName', 'Sản phẩm')} 
+        onPress={() => navigation.navigate('Search')}  
+      />,
       headerStyle: { backgroundColor: '#377ECC', height: 60 },
       headerTintColor: 'white',
       headerBackTitleStyle: { display: 'none' }
@@ -29,10 +32,9 @@ export default class Products extends React.Component {
   componentDidMount() {
     this.setState({ spinner: true });
 
-    const { navigation } = this.props;
-    const categoryId = navigation.getParam('categoryId');
+    const categoryId = this.props.navigation.getParam('categoryId');
 
-    callApi('product/allproduct', 'GET', { cid: categoryId }).then(res => {
+    callApi('product/allproduct', 'GET', null).then(res => {
       const data = res.data
         .filter(product => {
           return product.cid === categoryId && product.status === '1'
@@ -48,12 +50,12 @@ export default class Products extends React.Component {
 
   render() {
     const { navigation } = this.props;
-    const { products } = this.state;
+    const { products, spinner } = this.state;
 
     return (
       <View style={styles.container}>
         <Spinner
-          visible={this.state.spinner}
+          visible={spinner}
           textContent={'Đang tải...'}
           textStyle={{ color: '#fff' }}
         />
