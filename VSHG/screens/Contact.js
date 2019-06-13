@@ -1,12 +1,12 @@
 import React from "react";
 import { Text, View, StyleSheet, ScrollView, Linking } from "react-native";
-import { Fab, Button } from "native-base";
 import HTML from "react-native-render-html";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+
 import Spinner from 'react-native-loading-spinner-overlay';
 
 import callApi from "./../callApi";
 import Header from "../components/Header";
+import DetailContactButton from './../components/DetailContactButton';
 
 export default class Contact extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -15,7 +15,7 @@ export default class Contact extends React.Component {
         titleScreen="Thông tin liên hệ" 
         onPress={() => navigation.navigate('Search')}  
       />,
-      headerStyle: { backgroundColor: "#377ECC" },
+      headerStyle: { backgroundColor: "#377ECC", height: 60 },
       headerBackTitleStyle: { display: "none" }
     };
   };
@@ -75,34 +75,10 @@ export default class Contact extends React.Component {
         <ScrollView style={styles.container}>
           <HTML html={`${aboutus}`} />
         </ScrollView>
-        <Fab
-          active={isActiveContactButton}
-          direction="up"
-          containerStyle={{ position: "absolute", bottom: 10, right: 10 }}
-          style={{ backgroundColor: "#34A34F" }}
-          position="bottomRight"
-          onPress={() => this.setState({ isActiveContactButton: !isActiveContactButton })}
-        >
-          <Icon name="headphones" size={40} />
-          <Button 
-            style={{ backgroundColor: "#DD5144" }}
-            onPress={ () => Linking.openURL(`tel:${contact.m_phone}`)}
-          >
-            <Icon name="phone" size={20} color="#fff" />
-          </Button>
-          <Button 
-            style={{ backgroundColor: "#00AFF0" }}
-            onPress={ () => Linking.openURL(`skype:${contact.m_skype}?call`)}
-            >
-            <Icon name="skype" size={20} color="#fff" />
-          </Button>
-          <Button 
-            style={{ backgroundColor: "#0084ff" }}
-            onPress={ () => Linking.openURL(`http://zalo.me/${contact.m_zalo}`)}
-          >
-            <Text style={{ fontSize: 20, color: '#fff', fontWeight: '700' }}>Z</Text>
-          </Button>
-        </Fab>
+        <DetailContactButton 
+          isActiveContactButton={isActiveContactButton} 
+          contact={contact} 
+        />
       </View>
     );
   }
@@ -111,17 +87,7 @@ export default class Contact extends React.Component {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 15,
-    paddingTop: 0,
+    paddingTop: 15,
     backgroundColor: "#fff"
-  },
-  textContact: {
-    position: 'absolute', 
-    right: 45, 
-    width: 100,
-    textAlign: 'center',
-    lineHeight: 40,
-    height: 40,
-    borderRadius: 20,
-    color: '#fff'
   }
 });

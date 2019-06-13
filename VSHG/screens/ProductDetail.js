@@ -1,9 +1,10 @@
 import React from 'react';
-import { ScrollView, Text, Image, StyleSheet, View, TouchableOpacity, Linking } from 'react-native';
+import { ScrollView, Text, Image, StyleSheet, View } from 'react-native';
 import HTML from 'react-native-render-html';
 import callApi from "./../callApi";
 
 import Header from './../components/Header';
+import DetailContactButton from './../components/DetailContactButton';
 
 export default class ProductDetail extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -21,6 +22,7 @@ export default class ProductDetail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      isActiveContactButton: false,
       contact: {}
     }
   }
@@ -41,7 +43,7 @@ export default class ProductDetail extends React.Component {
 
   render() {
     const { navigation } = this.props;
-    const { contact } = this.state;
+    const { contact, isActiveContactButton } = this.state;
     const name = navigation.getParam('productName')
     const image = navigation.getParam('productImage')
     const description = navigation.getParam('productDesc');
@@ -64,11 +66,10 @@ export default class ProductDetail extends React.Component {
             </View>
           </View>
         </ScrollView>
-        <TouchableOpacity activeOpacity={0.9} style={styles.order}>
-          <Text style={styles.orderText} onPress={ () => Linking.openURL(`tel:${contact.m_phone}`)}>
-            LIÊN HỆ ĐẶT MUA
-          </Text>
-        </TouchableOpacity>
+        <DetailContactButton 
+          isActiveContactButton={isActiveContactButton} 
+          contact={contact} 
+        />
       </View>
     )
   }
@@ -96,22 +97,6 @@ const styles = StyleSheet.create({
     flex: 1,
     width: null,
     marginBottom: 15,
-  },
-  order: {
-    width: '100%',
-    paddingVertical: 12,
-    backgroundColor: '#377ECC',
-    alignItems: 'center',
-    marginBottom: 15,
-    position: 'absolute',
-    bottom: -15,
-  },
-  orderText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: '600',
-    width: '100%',
-    textAlign: 'center'
   },
   description: {
     padding: 15,

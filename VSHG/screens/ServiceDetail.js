@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, Text, Image, StyleSheet, View, TouchableOpacity, Linking, Dimensions } from 'react-native';
+import { ScrollView, Text, Image, StyleSheet, View, Dimensions } from 'react-native';
 import HTML from 'react-native-render-html';
 import callApi from "./../callApi";
 
@@ -23,6 +23,7 @@ export default class ProductDetail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      isActiveContactButton: false,
       contact: {}
     }
   }
@@ -33,15 +34,17 @@ export default class ProductDetail extends React.Component {
 
   onFetchContact = () => {
     callApi('config', 'GET', null).then(res => {
+      const contactJsonMode = JSON.parse(res.data);
+
       this.setState({
-        contact: JSON.parse(res.data),
+        contact: contactJsonMode,
       })
     })
   }
 
   render() {
     const { navigation } = this.props;
-    const { contact } = this.state;
+    const { contact, isActiveContactButton } = this.state;
     const name = navigation.getParam('serviceName')
     const image = navigation.getParam('serviceImage')
     const description = navigation.getParam('serviceDesc');
@@ -61,14 +64,10 @@ export default class ProductDetail extends React.Component {
             </View>
           </View>
         </ScrollView>
-        <TouchableOpacity activeOpacity={0.9} style={styles.order}>
-          <Text 
-            style={styles.orderText} 
-            onPress={ () => Linking.openURL(`tel:${contact.m_phone}`)}
-          >
-            LIÊN HỆ ĐẶT DỊCH VỤ NGAY
-          </Text>
-        </TouchableOpacity>
+        <DetailContactButton 
+          isActiveContactButton={isActiveContactButton} 
+          contact={contact} 
+        />
       </View>
     )
   }
@@ -96,22 +95,6 @@ const styles = StyleSheet.create({
     flex: 1,
     width: null,
     marginBottom: 15,
-  },
-  order: {
-    width: '100%',
-    paddingVertical: 12,
-    backgroundColor: '#377ECC',
-    alignItems: 'center',
-    marginBottom: 15,
-    position: 'absolute',
-    bottom: -15,
-  },
-  orderText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: '600',
-    width: '100%',
-    textAlign: 'center'
   },
   description: {
     padding: 15,

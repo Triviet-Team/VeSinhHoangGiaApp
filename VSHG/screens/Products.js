@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, FlatList, Text } from 'react-native';
+import { View, StyleSheet, FlatList, Text, Dimensions } from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 import ProductListItem from '../components/ProductListItem';
@@ -15,7 +15,8 @@ export default class Products extends React.Component {
       />,
       headerStyle: { backgroundColor: '#377ECC', height: 60 },
       headerTintColor: 'white',
-      headerBackTitleStyle: { display: 'none' }
+      headerBackTitle : null,
+      headerBackTitleStyle: { display: 'none', width: 0 }
     }
   }
 

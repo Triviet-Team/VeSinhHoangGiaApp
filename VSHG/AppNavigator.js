@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { createStackNavigator, createMaterialTopTabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import Homepage from './screens/Homepage';
@@ -23,16 +23,12 @@ const HomepageStack = createStackNavigator({
   ServiceDetail,
   Products,
   AllProducts,
-  Search
+  Search,
 });
 HomepageStack.navigationOptions = {
   tabBarLabel: 'Trang chủ',
   tabBarIcon: ({ focused }) => {
     return <Icon name="ios-home" size={24} color={ focused ? '#377ECC' : 'gray' } />
-  },
-  tabBarOptions: {
-    activeTintColor: '#377ECC',
-    inactiveTintColor: 'gray'
   }
 }
 
@@ -46,10 +42,6 @@ ProductsStack.navigationOptions = {
   tabBarLabel: 'Danh mục',
   tabBarIcon: ({ focused }) => {
     return <Icon name="md-cube" size={24} color={ focused ? '#377ECC' : 'gray' } />
-  },
-  tabBarOptions: {
-    activeTintColor: '#377ECC',
-    inactiveTintColor: 'gray'
   }
 }
 
@@ -62,10 +54,6 @@ ServicesStack.navigationOptions = {
   tabBarLabel: 'Dịch vụ',
   tabBarIcon: ({ focused }) => {
     return <Icon name="ios-people" size={24} color={ focused ? '#377ECC' : 'gray' } />
-  },
-  tabBarOptions: {
-    activeTintColor: '#377ECC',
-    inactiveTintColor: 'gray'
   }
 }
 
@@ -77,10 +65,6 @@ ChemistriesStack.navigationOptions = {
   tabBarLabel: 'Hóa chất',
   tabBarIcon: ({ focused }) => {
     return <Icon name="ios-flask" size={24} color={ focused ? '#377ECC' : 'gray' } />
-  },
-  tabBarOptions: {
-    activeTintColor: '#377ECC',
-    inactiveTintColor: 'gray'
   }
 }
 
@@ -92,19 +76,45 @@ ContactStack.navigationOptions = {
   tabBarLabel: 'Liên hệ',
   tabBarIcon: ({ focused }) => {
     return <Icon name="ios-mail" size={24} color={ focused ? '#377ECC' : 'gray' } />
-  },
-  tabBarOptions: {
-    activeTintColor: '#377ECC',
-    inactiveTintColor: 'gray'
   }
 }
 
-const AppNavigator = createBottomTabNavigator({
+const AppNavigator = createMaterialTopTabNavigator({
   HomepageStack,
   ProductsStack,
   ServicesStack,
   ChemistriesStack,
   ContactStack
-});
+},
+{
+  initialRouteName: 'HomepageStack',
+  tabBarPosition: 'bottom',
+  swipeEnabled: true,
+  animationEnabled: true,
+  tabBarOptions: {
+    activeTintColor: '#377ECC',
+    inactiveTintColor: 'gray',
+    style: {
+      backgroundColor: '#fff',
+      padding: 0
+    },
+    labelStyle: {
+      textAlign: 'center',
+      fontSize: 10,
+      marginBottom: 0,
+      marginHorizontal: -10
+    },
+    showIcon: true,
+    upperCaseLabel: false,
+    indicatorStyle: {
+      borderBottomColor: '#377ECC',
+      borderBottomWidth: 2,
+    },
+    iconStyle: {
+      marginVertical: -5,
+    }
+  },
+}
+);
 
 export default AppNavigator;

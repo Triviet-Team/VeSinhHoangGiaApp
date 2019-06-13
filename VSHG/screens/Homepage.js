@@ -6,6 +6,7 @@ import callApi from './../callApi';
 
 import Header from './../components/Header';
 import Banner from './../components/Homepage/Banner';
+import AboutusHomepage from './../components/Homepage/AboutusHomepage';
 import ServicesHomepage from './../components/Homepage/ServicesHomepage';
 import CategoriesHomepage from './../components/Homepage/CategoriesHomepage';
 import ProductsHomepage from './../components/Homepage/ProductsHomepage';
@@ -19,6 +20,7 @@ export default class Homepage extends React.Component {
         onPress={() => navigation.navigate('Search')}  
       />,
       headerStyle: { backgroundColor: '#377ECC', height: 60 },
+      headerTintColor: 'white',
       headerBackTitleStyle: { display: 'none' }
     }
   }
@@ -31,6 +33,7 @@ export default class Homepage extends React.Component {
       categories: [],
       services: [],
       products: [],
+      contact: {},
       spinner: false,
       refreshing: false,
     }
@@ -38,10 +41,11 @@ export default class Homepage extends React.Component {
 
   componentDidMount() {
     this.setState({ spinner: true })
+    this.onFetchBanner();
+    this.onFetchAboutus();
     this.onFetchCategories();
     this.onFetchServices();
     this.onFetchProducts();
-    this.onFetchBanner();
   }
 
   onFetchBanner = () => {
@@ -56,6 +60,15 @@ export default class Homepage extends React.Component {
         banners: bannersPublic,
         spinner: false,
         refreshing: false,
+      })
+    })
+  }
+
+  onFetchAboutus = () => {
+    callApi('config', 'GET', null).then(res => {
+      const aboutusJsonMode = JSON.parse(res.data);
+      this.setState({
+        aboutus: aboutusJsonMode,
       })
     })
   }
@@ -117,7 +130,9 @@ export default class Homepage extends React.Component {
   };
 
   render() {
-    const { banners, categories, services, products, refreshing, spinner } = this.state;
+    const { 
+      banners, aboutus, categories, services, products, refreshing, spinner 
+    } = this.state;
     const { navigation } = this.props
 
     return (
@@ -136,6 +151,10 @@ export default class Homepage extends React.Component {
           textStyle={{ color: '#fff' }}
         />
         <Banner banners={banners} />
+        <AboutusHomepage 
+          navigation={navigation} 
+          aboutus={aboutus}
+        />
         <CategoriesHomepage 
           navigation={navigation} 
           categories={categories}

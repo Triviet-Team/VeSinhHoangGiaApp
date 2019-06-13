@@ -13,7 +13,7 @@ export default class Services extends React.Component {
         titleScreen="Dịch vụ vệ sinh"  
         onPress={() => navigation.navigate('Search')} 
       />,
-      headerStyle: { backgroundColor: '#377ECC' },
+      headerStyle: { backgroundColor: '#377ECC', height: 60 },
       headerTintColor: 'white',
       headerBackTitleStyle: { display: 'none' }
     }
