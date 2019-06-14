@@ -150,7 +150,7 @@ export default class Search extends React.Component {
               />
             </ScrollView>
           </Tab>
-          
+
           <Tab heading="Dịch vụ">
             <ScrollView>
               {services !== null && services.length > 0 ? (

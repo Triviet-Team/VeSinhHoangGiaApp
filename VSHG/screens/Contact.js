@@ -2,19 +2,21 @@ import React from "react";
 import { Text, View, StyleSheet, ScrollView, Linking } from "react-native";
 import HTML from "react-native-render-html";
 
-import Spinner from 'react-native-loading-spinner-overlay';
+import Spinner from "react-native-loading-spinner-overlay";
 
 import callApi from "./../callApi";
 import Header from "../components/Header";
-import DetailContactButton from './../components/DetailContactButton';
+import DetailContactButton from "./../components/DetailContactButton";
 
 export default class Contact extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      headerTitle: <Header 
-        titleScreen="Thông tin liên hệ" 
-        onPress={() => navigation.navigate('Search')}  
-      />,
+      headerTitle: (
+        <Header
+          titleScreen="Thông tin liên hệ"
+          onPress={() => navigation.navigate("Search")}
+        />
+      ),
       headerStyle: { backgroundColor: "#377ECC", height: 60 },
       headerBackTitleStyle: { display: "none" }
     };
@@ -24,7 +26,7 @@ export default class Contact extends React.Component {
     super(props);
 
     this.state = {
-      aboutus: 'Chưa có dữ liệu',
+      aboutus: "Chưa có dữ liệu",
       isActiveContactButton: false,
       spinner: false,
       contact: {}
@@ -32,7 +34,7 @@ export default class Contact extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ spinner: true })
+    this.setState({ spinner: true });
     this.fetchAboutusScreen();
     this.onFetchContact();
   }
@@ -47,37 +49,37 @@ export default class Contact extends React.Component {
 
       this.setState({
         aboutus: aboutusPage,
-        spinner: false,
+        spinner: false
       });
     });
   };
 
   onFetchContact = () => {
-    callApi('config', 'GET', null).then(res => {
+    callApi("config", "GET", null).then(res => {
       const contactJsonMode = JSON.parse(res.data);
 
       this.setState({
-        contact: contactJsonMode,
-      })
-    })
-  }
+        contact: contactJsonMode
+      });
+    });
+  };
 
   render() {
     const { contact, spinner, isActiveContactButton, aboutus } = this.state;
-    
+
     return (
       <View>
         <Spinner
           visible={spinner}
-          textContent={'Đang tải...'}
-          textStyle={{ color: '#fff' }}
+          textContent={"Đang tải..."}
+          textStyle={{ color: "#fff" }}
         />
         <ScrollView style={styles.container}>
           <HTML html={`${aboutus}`} />
         </ScrollView>
-        <DetailContactButton 
-          isActiveContactButton={isActiveContactButton} 
-          contact={contact} 
+        <DetailContactButton
+          isActiveContactButton={isActiveContactButton}
+          contact={contact}
         />
       </View>
     );

@@ -1,10 +1,10 @@
-import React from 'react';
-import { createAppContainer } from 'react-navigation';
-import AppNavigator from './AppNavigator';
+import React from "react";
+import { createAppContainer } from "react-navigation";
+import AppNavigator from "./AppNavigator";
 import { AppLoading } from "expo";
-import * as Font from 'expo-font'
+import * as Font from "expo-font";
 
-const AppContainer = createAppContainer(AppNavigator)
+const AppContainer = createAppContainer(AppNavigator);
 
 export default class App extends React.Component {
   constructor(props) {
@@ -19,16 +19,12 @@ export default class App extends React.Component {
     });
     this.setState({ loading: false });
   }
-  
+
   render() {
     if (this.state.loading) {
-      return (
-        <AppLoading />
-      );
+      return <AppLoading />;
     }
 
-    return (
-      <AppContainer />
-    );
+    return <AppContainer />;
   }
 }
