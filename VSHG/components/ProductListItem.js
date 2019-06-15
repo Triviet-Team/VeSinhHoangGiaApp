@@ -8,11 +8,12 @@ import {
   Dimensions
 } from "react-native";
 
+import * as config from './../config';
+
 const { width } = Dimensions.get("window");
 
 export default function ProductListItem(props) {
   const { product, onPress } = props;
-  const imgDirName = "https://vesinhcongnghiep.com.vn/uploads/images/product/350_350";
 
   return (
     <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
@@ -20,7 +21,7 @@ export default function ProductListItem(props) {
         <View style={styles.imgBox}>
           <Image
             style={styles.img}
-            source={{ uri: `${imgDirName}/${product.image_link}` }}
+            source={{ uri: `${config.PRODUCT_DIR_NAME}/${product.image_link}` }}
           />
         </View>
         <View style={styles.detail}>

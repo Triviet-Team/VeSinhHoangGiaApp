@@ -3,11 +3,12 @@ import { StyleSheet, Image, Dimensions, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import Swiper from 'react-native-swiper';
 
+import * as config from './../../config';
+
 const { width } = Dimensions.get('window');
 
 export default function Banner(props) {
   const { banners } = props;
-  const imgDirName = 'https://vesinhcongnghiep.com.vn/uploads/images/ads';
 
   return (
     <View style={styles.banner}>
@@ -24,7 +25,7 @@ export default function Banner(props) {
           return <Image 
             key={ banner.id }
             style={{ height: width / 2, flex: 1 }} 
-            source={{ uri: `${imgDirName}/${banner.image_link}` }}  
+            source={{ uri: `${config.BANNER_DIR_NAME}/${banner.image_link}` }}  
           />
         })}
       </Swiper>

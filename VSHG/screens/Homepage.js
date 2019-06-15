@@ -1,22 +1,22 @@
 import React from "react";
+import Spinner from "react-native-loading-spinner-overlay";
 import {
   StyleSheet,
   ScrollView,
   RefreshControl,
   View,
   Text,
-  SafeAreaView
 } from "react-native";
-import Spinner from "react-native-loading-spinner-overlay";
 
 import callApi from "./../callApi";
-
 import Header from "./../components/Header";
-import Banner from "./../components/Homepage/Banner";
-import AboutusHomepage from "./../components/Homepage/AboutusHomepage";
-import ServicesHomepage from "./../components/Homepage/ServicesHomepage";
-import CategoriesHomepage from "./../components/Homepage/CategoriesHomepage";
-import ProductsHomepage from "./../components/Homepage/ProductsHomepage";
+import {
+  Banner,
+  AboutusHomepage,
+  ServicesHomepage,
+  CategoriesHomepage,
+  ProductsHomepage
+} from "./../components/Homepage";
 
 export default class Homepage extends React.Component {
   static navigationOptions = ({ navigation }) => {

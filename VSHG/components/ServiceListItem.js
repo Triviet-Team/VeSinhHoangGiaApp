@@ -7,12 +7,12 @@ import {
   TouchableOpacity,
   Dimensions
 } from "react-native";
+import * as config from './../config';
 
 const { width } = Dimensions.get("window");
 
-export default function ProductListItem(props) {
+export default function ServiceListItem(props) {
   const { service, onPress } = props;
-  const imgDirUrl = "https://vesinhcongnghiep.com.vn/uploads/images/news/350_350";
 
   return (
     <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
@@ -20,7 +20,7 @@ export default function ProductListItem(props) {
         <View style={styles.imgBox}>
           <Image
             style={styles.img}
-            source={{ uri: `${imgDirUrl}/${service.image_link}` }}
+            source={{ uri: `${config.SERVICE_DIR_NAME}/${service.image_link}` }}
           />
         </View>
         <View style={styles.detail}>
