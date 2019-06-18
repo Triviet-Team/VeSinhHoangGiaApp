@@ -1,10 +1,11 @@
 import React from "react";
-import { View, StyleSheet, FlatList, Text } from "react-native";
+import { View, StyleSheet, FlatList, Text, ScrollView } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
 
 import callApi from "./../callApi";
 import Header from "./../components/Header";
 import ServiceListItem from "./../components/ServiceListItem";
+import NameHeader from "../components/NameHeader";
 
 export default class Services extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -56,31 +57,36 @@ export default class Services extends React.Component {
           textContent={"Đang tải..."}
           textStyle={{ color: "#fff" }}
         />
-        {services !== null && services.length > 0 ? (
-          <FlatList
-            style={styles.scrollView}
-            data={services}
-            renderItem={({ item }) => (
-              <View style={styles.wrapper}>
-                <ServiceListItem
-                  service={item}
-                  onPress={() =>
-                    navigation.navigate("ServiceDetail", {
-                      serviceName: item.vn_name,
-                      serviceImage: item.image_link,
-                      serviceDesc: item.vn_detail
-                    })
-                  }
-                />
-              </View>
-            )}
-            keyExtractor={item => `${item.id}`}
-          />
-        ) : (
-          <View style={styles.empty}>
-            <Text style={styles.emptyText}>Chưa có dịch vụ nào trong mục</Text>
-          </View>
-        )}
+        <ScrollView>
+          <NameHeader />
+          {services !== null && services.length > 0 ? (
+            <FlatList
+              style={styles.scrollView}
+              data={services}
+              renderItem={({ item }) => (
+                <View style={styles.wrapper}>
+                  <ServiceListItem
+                    service={item}
+                    onPress={() =>
+                      navigation.navigate("ServiceDetail", {
+                        serviceName: item.vn_name,
+                        serviceImage: item.image_link,
+                        serviceDesc: item.vn_detail
+                      })
+                    }
+                  />
+                </View>
+              )}
+              keyExtractor={item => `${item.id}`}
+            />
+          ) : (
+            <View style={styles.empty}>
+              <Text style={styles.emptyText}>
+                Chưa có dịch vụ nào trong mục
+              </Text>
+            </View>
+          )}
+        </ScrollView>
       </View>
     );
   }

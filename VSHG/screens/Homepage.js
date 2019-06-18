@@ -17,46 +17,18 @@ import {
   CategoriesHomepage,
   ProductsHomepage
 } from "./../components/Homepage";
+import NameHeader from "../components/NameHeader";
 
 export default class Homepage extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: (
-        <View>
-          <View
-            style={{
-              flexDirection: "row",
-              paddingHorizontal: 5,
-              justifyContent: "space-between",
-              alignItems: "center",
-              height: 50
-            }}
-          >
-            <ScrollView horizontal>
-              <Text
-                numberOfLines={1}
-                style={{
-                  color: "#fff",
-                  fontWeight: "600",
-                  paddingRight: 10,
-                  flex: 1,
-                  alignItems: "flex-end"
-                }}
-              >
-                CTY TNHH ĐT TM DV HOÀNG GIA
-              </Text>
-            </ScrollView>
-            <Text style={{ color: "#fff", fontWeight: "600" }}>
-              0939 38 39 39
-            </Text>
-          </View>
-          <Header
-            titleScreen="Trang chủ"
-            onPress={() => navigation.navigate("Search")}
-          />
-        </View>
+        <Header
+          titleScreen="Trang chủ"
+          onPress={() => navigation.navigate("Search")}
+        />
       ),
-      headerStyle: { backgroundColor: "#377ECC", height: 110 },
+      headerStyle: { backgroundColor: "#377ECC", height: 60 },
       headerTintColor: "white",
       headerBackTitleStyle: { display: "none" }
     };
@@ -194,6 +166,7 @@ export default class Homepage extends React.Component {
             textContent={"Đang tải..."}
             textStyle={{ color: "#fff" }}
           />
+          <NameHeader />
           <Banner banners={banners} />
           <AboutusHomepage navigation={navigation} aboutus={aboutus} />
           <CategoriesHomepage navigation={navigation} categories={categories} />

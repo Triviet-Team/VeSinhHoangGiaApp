@@ -1,10 +1,11 @@
 import React from "react";
-import { View, StyleSheet, FlatList, Text } from "react-native";
+import { View, FlatList, Text, ScrollView, StyleSheet } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
 
 import ProductListItem from "../components/ProductListItem";
 import Header from "./../components/Header";
 import callApi from "./../callApi";
+import NameHeader from "../components/NameHeader";
 
 export default class Chemistries extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -58,32 +59,37 @@ export default class Chemistries extends React.Component {
           textContent={"Đang tải..."}
           textStyle={{ color: "#fff" }}
         />
-        {chemistries !== null && chemistries.length > 0 ? (
-          <FlatList
-            style={styles.scrollView}
-            data={chemistries}
-            numColumns={2}
-            renderItem={({ item }) => (
-              <View style={styles.wrapper}>
-                <ProductListItem
-                  product={item}
-                  onPress={() =>
-                    navigation.navigate("ProductDetail", {
-                      productName: item.vn_name,
-                      productImage: item.image_link,
-                      productDesc: item.vn_detail
-                    })
-                  }
-                />
-              </View>
-            )}
-            keyExtractor={item => `${item.id}`}
-          />
-        ) : (
-          <View style={styles.empty}>
-            <Text style={styles.emptyText}>Chưa có sản phẩm nào trong mục</Text>
-          </View>
-        )}
+        <ScrollView>
+          <NameHeader />
+          {chemistries !== null && chemistries.length > 0 ? (
+            <FlatList
+              style={styles.scrollView}
+              data={chemistries}
+              numColumns={2}
+              renderItem={({ item }) => (
+                <View style={styles.wrapper}>
+                  <ProductListItem
+                    product={item}
+                    onPress={() =>
+                      navigation.navigate("ProductDetail", {
+                        productName: item.vn_name,
+                        productImage: item.image_link,
+                        productDesc: item.vn_detail
+                      })
+                    }
+                  />
+                </View>
+              )}
+              keyExtractor={item => `${item.id}`}
+            />
+          ) : (
+            <View style={styles.empty}>
+              <Text style={styles.emptyText}>
+                Chưa có sản phẩm nào trong mục
+              </Text>
+            </View>
+          )}
+        </ScrollView>
       </View>
     );
   }

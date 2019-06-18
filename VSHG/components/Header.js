@@ -47,7 +47,8 @@ const styles = StyleSheet.create({
   titleAndr: {
     fontSize: 20,
     fontWeight: "500",
-    color: "#fff"
+    color: "#fff",
+    width: '90%'
   },
   titleIOS: {
     fontSize: 20,

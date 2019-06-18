@@ -4,13 +4,15 @@ import {
   StyleSheet,
   FlatList,
   RefreshControl,
-  Dimensions
+  Dimensions,
+  ScrollView
 } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
 
 import CategoryListItem from "../components/CategoryListItem";
 import Header from "./../components/Header";
 import callApi from "./../callApi";
+import NameHeader from "../components/NameHeader";
 
 export default class Categories extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -72,33 +74,35 @@ export default class Categories extends React.Component {
           textContent={"Đang tải..."}
           textStyle={{ color: "#fff" }}
         />
-
-        <FlatList
-          style={styles.scrollView}
-          data={categories}
-          numColumns={2}
-          renderItem={({ item }) => (
-            <View style={styles.wrapper}>
-              <CategoryListItem
-                width={Dimensions.get("window").width / 2 - 15}
-                category={item}
-                onPress={() =>
-                  navigation.navigate("Products", {
-                    categoryId: item.id,
-                    categoryName: item.vn_name
-                  })
-                }
+        <ScrollView>
+          <NameHeader />
+          <FlatList
+            style={styles.scrollView}
+            data={categories}
+            numColumns={2}
+            renderItem={({ item }) => (
+              <View style={styles.wrapper}>
+                <CategoryListItem
+                  width={Dimensions.get("window").width / 2 - 15}
+                  category={item}
+                  onPress={() =>
+                    navigation.navigate("Products", {
+                      categoryId: item.id,
+                      categoryName: item.vn_name
+                    })
+                  }
+                />
+              </View>
+            )}
+            keyExtractor={item => `${item.id}`}
+            refreshControl={
+              <RefreshControl
+                refreshing={this.state.refreshing}
+                onRefresh={this._onRefresh}
               />
-            </View>
-          )}
-          keyExtractor={item => `${item.id}`}
-          refreshControl={
-            <RefreshControl
-              refreshing={this.state.refreshing}
-              onRefresh={this._onRefresh}
-            />
-          }
-        />
+            }
+          />
+        </ScrollView>
       </View>
     );
   }
